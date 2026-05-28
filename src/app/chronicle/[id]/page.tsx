@@ -123,6 +123,14 @@ export default async function ChroniclePage({ params }: ChroniclePageProps) {
 
         <hr className="divider" />
 
+        {/* Chronicles Section (Client-side) */}
+        <ChronicleClient
+          legendId={legend.id}
+          spiritName={legend.nome}
+          color={privilegi.color}
+          awakenings={awakenings}
+        />
+
         {/* Call to Action */}
         <div className="chronicle-cta">
           <div className="cta-content">
@@ -186,17 +194,9 @@ export default async function ChroniclePage({ params }: ChroniclePageProps) {
             {legend.autenticato ? '✓ VERIFIED LEGEND' : 'PROTOTYPE STATUS'}
           </div>
           <div style={{ fontSize: '11px', color: 'var(--muted)' }}>
-            This totem will continue to gather awakening records as it moves through the world.
+            This legend will continue to gather awakening records as it moves through the world.
           </div>
         </div>
-
-        {/* Captain's Log Section (Client-side) */}
-        <ChronicleClient
-          legendId={legend.id}
-          spiritName={legend.nome}
-          color={privilegi.color}
-          awakenings={awakenings}
-        />
       </div>
     </main>
   )
