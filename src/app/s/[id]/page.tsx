@@ -137,8 +137,8 @@ export default async function SpiritPage({ params }: Props) {
 
         <hr className="divider" />
 
-        {/* Ship's Log */}
-        <h2 className="display" style={{ fontSize: '28px', marginBottom: '24px' }}>SHIP'S LOG</h2>
+        {/* Chronicles */}
+        <h2 className="display" style={{ fontSize: '28px', marginBottom: '24px' }}>CHRONICLES</h2>
         <div>
           {[...(awakenings ?? [])].reverse().map((entry, idx, arr) => (
             <div key={entry.id} className="timeline-item">
