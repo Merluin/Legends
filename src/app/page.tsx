@@ -23,8 +23,7 @@ export default async function Home() {
           Legends keeps both alive.
         </p>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/summon" className="btn btn-primary">Summon a Legend</Link>
-          <Link href="/explore" className="btn btn-ghost">Explore Spirits</Link>
+          <Link href="/explore" className="btn btn-primary">Explore Spirits</Link>
         </div>
       </section>
 
@@ -147,11 +146,8 @@ export default async function Home() {
 
       {/* CTA */}
       <section style={{ textAlign: 'center', padding: '80px 24px', background: 'linear-gradient(180deg, transparent, rgba(123, 94, 167, 0.08))' }}>
-        <h2 className="display" style={{ fontSize: '48px', marginBottom: '16px' }}>READY TO SUMMON?</h2>
-        <p style={{ color: 'var(--muted)', marginBottom: '32px', fontStyle: 'italic' }}>Every legend begins with a Summoner.</p>
-        <Link href="/summon" className="btn btn-primary" style={{ fontSize: '18px', padding: '16px 40px' }}>
-          Summon a New Legend
-        </Link>
+        <h2 className="display" style={{ fontSize: '48px', marginBottom: '16px' }}>READY TO AWAKEN A SPIRIT?</h2>
+        <p style={{ color: 'var(--muted)', marginBottom: '32px', fontStyle: 'italic' }}>Scan the QR code on your Legend card to begin the summoning.</p>
       </section>
     </main>
   )
