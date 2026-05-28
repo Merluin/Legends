@@ -38,11 +38,11 @@ export default function Home() {
               The card will fade with time. The Spirit never does.
             </p>
           </div>
-          <div style={{ borderRadius: '4px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 168, 67, 0.2)' }}>
+          <div style={{ borderRadius: '4px', overflow: 'hidden' }}>
             <img
               src="/images/legend_game.png"
               alt="Legends gameplay - friends playing board games with a Legend card"
-              style={{ width: '100%', height: 'auto', display: 'block' }}
+              style={{ width: '100%', height: 'auto', display: 'block', opacity: 0.9 }}
             />
           </div>
         </div>
