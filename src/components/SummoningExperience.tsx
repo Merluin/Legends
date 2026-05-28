@@ -13,15 +13,25 @@ export default function SummoningExperience({ id, name, color, onComplete }: Sum
   const [phase, setPhase] = useState<'intro' | 'sigil' | 'complete'>('intro')
 
   useEffect(() => {
+    console.log('🌟 SummoningExperience mounted', { id, name })
+
     // Intro phase: 1.5s
-    const introTimer = setTimeout(() => setPhase('sigil'), 1500)
+    const introTimer = setTimeout(() => {
+      console.log('→ Phase: sigil')
+      setPhase('sigil')
+    }, 1500)
 
     // Sigil phase: 2.5s
-    const sigilTimer = setTimeout(() => setPhase('complete'), 4000)
+    const sigilTimer = setTimeout(() => {
+      console.log('→ Phase: complete')
+      setPhase('complete')
+    }, 4000)
 
     // Animation complete: 1.5s
     const completeTimer = setTimeout(() => {
+      console.log('✓ Animation complete, calling onComplete')
       if (onComplete) onComplete()
+      else console.warn('⚠️ onComplete callback not provided!')
     }, 5500)
 
     return () => {

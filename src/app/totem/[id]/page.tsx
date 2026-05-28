@@ -67,12 +67,32 @@ export default function TotemPage({ params }: TotemPageProps) {
     <>
       {/* Show summoning animation first */}
       {phase === 'summoning' && (
-        <SummoningExperience
-          id={id}
-          name={legend.nome}
-          color={color}
-          onComplete={() => setPhase('setup')}
-        />
+        <div>
+          <SummoningExperience
+            id={id}
+            name={legend.nome}
+            color={color}
+            onComplete={() => setPhase('setup')}
+          />
+          {/* Skip button for testing */}
+          <button
+            onClick={() => setPhase('setup')}
+            style={{
+              position: 'fixed',
+              bottom: '20px',
+              right: '20px',
+              padding: '8px 12px',
+              background: 'rgba(255,255,255,0.1)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '12px',
+              zIndex: 10000,
+            }}
+          >
+            Skip to Form →
+          </button>
+        </div>
       )}
 
       {/* After animation, show setup form */}
