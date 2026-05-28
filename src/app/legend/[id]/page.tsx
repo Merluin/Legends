@@ -1,5 +1,6 @@
 'use client'
 
+// Vercel rebuild trigger
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { isLegendActivated } from '@/lib/legend'
