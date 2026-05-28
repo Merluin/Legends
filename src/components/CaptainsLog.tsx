@@ -25,13 +25,10 @@ export default function CaptainsLog({ awakenings, color, onOpenLog }: CaptainsLo
   return (
     <div style={{ marginBottom: '32px' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-        <h2 className="display" style={{ fontSize: '24px', flex: 1 }}>
-          ⚓ CAPTAIN'S LOG
+      <div style={{ marginBottom: '24px' }}>
+        <h2 className="display" style={{ fontSize: '24px' }}>
+          📖 CHRONICLES
         </h2>
-        <button onClick={onOpenLog} className="btn btn-primary" style={{ display: 'inline-block' }}>
-          + New Entry
-        </button>
       </div>
 
       {/* Log Entries */}
@@ -47,15 +44,8 @@ export default function CaptainsLog({ awakenings, color, onOpenLog }: CaptainsLo
         >
           <div style={{ fontSize: '24px', marginBottom: '12px' }}>📖</div>
           <p style={{ color: 'var(--muted)', fontStyle: 'italic' }}>
-            No entries yet. The log awaits its first awakening...
+            No chronicles yet. Scan the QR code to record the first awakening...
           </p>
-          <button
-            onClick={onOpenLog}
-            className="btn btn-ghost"
-            style={{ marginTop: '16px', display: 'inline-block' }}
-          >
-            Record the First Entry
-          </button>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -152,7 +142,7 @@ export default function CaptainsLog({ awakenings, color, onOpenLog }: CaptainsLo
           fontStyle: 'italic',
         }}
       >
-        <span style={{ color }}>⚓</span> Total Awakenings: {logEntries.length}
+        <span style={{ color }}>📖</span> Total Chronicles: {logEntries.length}
       </div>
     </div>
   )

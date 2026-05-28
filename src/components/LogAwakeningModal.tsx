@@ -155,7 +155,7 @@ export default function LogAwakeningModal({
             📖
           </div>
           <h2 className="display" style={{ fontSize: '28px', marginBottom: '8px' }}>
-            CAPTAIN'S LOG
+            CHRONICLE ENTRY
           </h2>
           <p style={{ color: 'var(--muted)', fontStyle: 'italic', fontSize: '14px' }}>
             {isReturnVisit
