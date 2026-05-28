@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
-import { activateTotem } from '@/lib/totem'
+import { activateLegend } from '@/lib/legend'
 import { PRIVILEGI } from '@/lib/supabase'
 
 interface TotemSetupFormProps {
@@ -44,12 +44,12 @@ export default function TotemSetupForm({ id, color }: TotemSetupFormProps) {
       if (updateError) throw updateError
 
       // Record activation
-      activateTotem(id)
+      activateLegend(id)
 
       // Redirect to chronicle
       router.push(`/chronicle/${id}`)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save totem')
+      setError(err instanceof Error ? err.message : 'Failed to save legend')
       setLoading(false)
     }
   }

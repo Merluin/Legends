@@ -2,20 +2,20 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { isTotemActivated } from '@/lib/totem'
+import { isLegendActivated } from '@/lib/legend'
 import SummoningExperience from '@/components/SummoningExperience'
 import TotemSetupForm from '@/components/TotemSetupForm'
 import LogAwakeningModal from '@/components/LogAwakeningModal'
 import { PRIVILEGI, type Legend } from '@/lib/supabase'
 import { supabase } from '@/lib/supabase'
 
-interface TotemPageProps {
+interface LegendPageProps {
   params: Promise<{ id: string }>
 }
 
 type PagePhase = 'loading' | 'summoning' | 'setup' | 'log-entry'
 
-export default function TotemPage({ params }: TotemPageProps) {
+export default function LegendPage({ params }: LegendPageProps) {
   const router = useRouter()
   const [{ id }, setId] = useState<{ id: string }>({ id: '' })
   const [phase, setPhase] = useState<PagePhase>('loading')
@@ -30,8 +30,8 @@ export default function TotemPage({ params }: TotemPageProps) {
   useEffect(() => {
     if (!id) return
 
-    // Check if this totem has been activated before
-    const activated = isTotemActivated(id)
+    // Check if this legend has been activated before
+    const activated = isLegendActivated(id)
 
     // First-time visitor: fetch legend and show summoning
     supabase

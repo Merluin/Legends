@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { isTotemActivated } from '@/lib/totem'
+import { isLegendActivated } from '@/lib/legend'
 import { supabase } from '@/lib/supabase'
 
 interface TotemDebugPageProps {
@@ -24,7 +24,7 @@ export default function TotemDebugPage({ params }: TotemDebugPageProps) {
     const logs: string[] = []
 
     // Check localStorage
-    const activated = isTotemActivated(id)
+    const activated = isLegendActivated(id)
     logs.push(`✓ localStorage check: activated = ${activated}`)
 
     if (activated) {
@@ -91,7 +91,7 @@ export default function TotemDebugPage({ params }: TotemDebugPageProps) {
 
         <button
           onClick={() => {
-            localStorage.removeItem(`totem_${id}`)
+            localStorage.removeItem(`legend_${id}`)
             window.location.reload()
           }}
           className="btn btn-primary"
@@ -101,15 +101,15 @@ export default function TotemDebugPage({ params }: TotemDebugPageProps) {
         </button>
 
         <button
-          onClick={() => window.location.href = `/totem/${id}`}
+          onClick={() => window.location.href = `/legend/${id}`}
           className="btn btn-ghost"
         >
           Back to Totem
         </button>
 
         <div style={{ marginTop: '32px', color: 'var(--muted)', fontSize: '14px' }}>
-          <p>📍 URL: /totem/{id}/debug</p>
-          <p>💾 localStorage key: totem_{id}</p>
+          <p>📍 URL: /legend/{id}/debug</p>
+          <p>💾 localStorage key: legend_{id}</p>
           <p>🔍 Check browser console (F12) for more details</p>
         </div>
       </div>
