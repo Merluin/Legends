@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { supabase, PRIVILEGI, type Legend } from '@/lib/supabase'
 import type { Metadata } from 'next'
 import KeeperUpdater from '@/components/KeeperUpdater'
+import ChronicleClient from '@/components/ChronicleClient'
 
 interface ChroniclePageProps {
   params: Promise<{ id: string }>
@@ -42,11 +43,10 @@ export default async function ChroniclePage({ params }: ChroniclePageProps) {
   const { id } = await params
   const upperId = id.toUpperCase()
 
-  const { data: legend } = await supabase
-    .from('legends')
-    .select('*')
-    .eq('id', upperId)
-    .single()
+  const [{ data: legend }, { data: awakenings }] = await Promise.all([
+    supabase.from('legends').select('*').eq('id', upperId).single(),
+    supabase.from('awakenings').select('*').eq('legend_id', upperId).order('created_at', { ascending: false }),
+  ])
 
   if (!legend) {
     notFound()
@@ -189,6 +189,14 @@ export default async function ChroniclePage({ params }: ChroniclePageProps) {
             This totem will continue to gather awakening records as it moves through the world.
           </div>
         </div>
+
+        {/* Captain's Log Section (Client-side) */}
+        <ChronicleClient
+          legendId={legend.id}
+          spiritName={legend.nome}
+          color={privilegi.color}
+          awakenings={awakenings}
+        />
       </div>
     </main>
   )

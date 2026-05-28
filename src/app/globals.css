@@ -484,6 +484,27 @@ nav .nav-links a:hover { color: var(--accent-light); }
   }
 }
 
+/* CAPTAIN'S LOG ANIMATIONS */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.log-entry {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
 @media (max-width: 600px) {
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
   .tipo-grid { grid-template-columns: 1fr; }
