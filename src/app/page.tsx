@@ -48,17 +48,26 @@ export default function Home() {
         <p style={{ color: 'var(--muted)', marginBottom: '32px', fontSize: '18px' }}>
           <strong style={{ color: 'var(--accent-light)' }}>A Right is an answer.</strong> When you bring your Legend into play, you invoke a privilege — a legitimate, agreed-upon authority to make one key decision. Fair. Respectful. Earned.
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+
+        <div style={{ display: 'grid', gap: '24px' }}>
           {[
-            { color: '#D4A843', label: 'FIRST',  title: 'Legend of the First',  desc: 'You decide who opens the game.' },
-            { color: '#9B7FD4', label: 'COLOUR', title: 'Legend of the Colour', desc: 'You choose your colour or faction.' },
-            { color: '#6BB89B', label: 'GAME',   title: 'Legend of the Game',   desc: 'You choose what game gets played.' },
-            { color: '#D48B9B', label: 'BOND',   title: 'Legend of the Bond',   desc: 'You choose your partner or team.' },
-          ].map(p => (
-            <div key={p.label} className="card" style={{ borderTop: `3px solid ${p.color}` }}>
-              <div className="chip" style={{ background: `${p.color}22`, color: p.color, border: `1px solid ${p.color}55`, marginBottom: '12px' }}>{p.label}</div>
-              <div className="display" style={{ fontSize: '18px', marginBottom: '8px' }}>{p.title}</div>
-              <div style={{ fontSize: '15px', color: 'var(--muted)', fontStyle: 'italic' }}>{p.desc}</div>
+            { icon: '♔', title: 'FIRST', desc: 'You decide who opens the game.' },
+            { icon: '◈', title: 'COLOUR', desc: 'You choose your colour or faction.' },
+            { icon: '⚄', title: 'GAME', desc: 'You choose what game gets played.' },
+            { icon: '❧', title: 'BOND', desc: 'You choose your partner or team.' },
+          ].map((item, idx) => (
+            <div key={idx} style={{ display: 'flex', gap: '20px', paddingBottom: '20px', borderBottom: idx < 3 ? '1px solid var(--border)' : 'none' }}>
+              <div style={{ fontSize: '40px', color: 'var(--accent-light)', minWidth: '60px' }}>
+                {item.icon}
+              </div>
+              <div>
+                <div className="display" style={{ fontSize: '18px', marginBottom: '6px', color: 'var(--accent-light)' }}>
+                  {item.title}
+                </div>
+                <div style={{ fontSize: '16px', color: 'var(--muted)' }}>
+                  {item.desc}
+                </div>
+              </div>
             </div>
           ))}
         </div>
