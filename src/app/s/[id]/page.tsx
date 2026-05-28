@@ -135,10 +135,6 @@ export default async function SpiritPage({ params }: Props) {
           </div>
         </div>
 
-        <Link href={`/s/${legend.id}/awaken`} className="btn btn-primary btn-block" style={{ marginBottom: '32px', display: 'block', textAlign: 'center' }}>
-          ✦ Chronicle an Awakening
-        </Link>
-
         <hr className="divider" />
 
         {/* Ship's Log */}
