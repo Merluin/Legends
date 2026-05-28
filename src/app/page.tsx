@@ -39,16 +39,21 @@ export default function Home() {
 
       <hr className="divider" />
 
-      {/* THE FOUR PRIVILEGES */}
+      {/* WHAT IS A RIGHT */}
       <section className="wrap">
-        <h2 className="display" style={{ fontSize: '40px', marginBottom: '8px' }}>THE FOUR RIGHTS</h2>
-        <p style={{ color: 'var(--dim)', fontStyle: 'italic', marginBottom: '32px' }}>Each Legend carries one privilege — exercised only when brought into play.</p>
+        <h2 className="display" style={{ fontSize: '40px', marginBottom: '8px' }}>WHAT IS A RIGHT?</h2>
+        <p style={{ color: 'var(--muted)', marginBottom: '24px', fontSize: '18px' }}>
+          Many games lack explicit rules for deciding who goes first, who chooses a colour or faction, what gets played next, or who partners with whom. These decisions often fall to chance, habit, or (let's be honest) whoever shouts loudest. This leaves room for bullying, exclusion, or simply unfair outcomes.
+        </p>
+        <p style={{ color: 'var(--muted)', marginBottom: '32px', fontSize: '18px' }}>
+          <strong style={{ color: 'var(--accent-light)' }}>A Right is an answer.</strong> When you bring your Legend into play, you invoke a privilege — a legitimate, agreed-upon authority to make one key decision. Fair. Respectful. Earned.
+        </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
           {[
-            { color: '#D4A843', label: 'FIRST',  title: 'Legend of the First',  desc: 'Decides who opens the game.' },
-            { color: '#9B7FD4', label: 'COLOUR', title: 'Legend of the Colour', desc: 'Chooses their colour or faction.' },
-            { color: '#6BB89B', label: 'GAME',   title: 'Legend of the Game',   desc: 'Chooses the game of the evening.' },
-            { color: '#D48B9B', label: 'BOND',   title: 'Legend of the Bond',   desc: 'Chooses their partner.' },
+            { color: '#D4A843', label: 'FIRST',  title: 'Legend of the First',  desc: 'You decide who opens the game.' },
+            { color: '#9B7FD4', label: 'COLOUR', title: 'Legend of the Colour', desc: 'You choose your colour or faction.' },
+            { color: '#6BB89B', label: 'GAME',   title: 'Legend of the Game',   desc: 'You choose what game gets played.' },
+            { color: '#D48B9B', label: 'BOND',   title: 'Legend of the Bond',   desc: 'You choose your partner or team.' },
           ].map(p => (
             <div key={p.label} className="card" style={{ borderTop: `3px solid ${p.color}` }}>
               <div className="chip" style={{ background: `${p.color}22`, color: p.color, border: `1px solid ${p.color}55`, marginBottom: '12px' }}>{p.label}</div>
