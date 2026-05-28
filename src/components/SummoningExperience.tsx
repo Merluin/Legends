@@ -1,17 +1,15 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { activateTotem } from '@/lib/totem'
 
 interface SummoningExperienceProps {
   id: string
   name: string
   color: string
+  onComplete?: () => void
 }
 
-export default function SummoningExperience({ id, name, color }: SummoningExperienceProps) {
-  const router = useRouter()
+export default function SummoningExperience({ id, name, color, onComplete }: SummoningExperienceProps) {
   const [phase, setPhase] = useState<'intro' | 'sigil' | 'complete'>('intro')
 
   useEffect(() => {
@@ -21,18 +19,17 @@ export default function SummoningExperience({ id, name, color }: SummoningExperi
     // Sigil phase: 2.5s
     const sigilTimer = setTimeout(() => setPhase('complete'), 4000)
 
-    // Redirect after completion: 1.5s
-    const redirectTimer = setTimeout(() => {
-      activateTotem(id)
-      router.push(`/chronicle/${id}`)
+    // Animation complete: 1.5s
+    const completeTimer = setTimeout(() => {
+      if (onComplete) onComplete()
     }, 5500)
 
     return () => {
       clearTimeout(introTimer)
       clearTimeout(sigilTimer)
-      clearTimeout(redirectTimer)
+      clearTimeout(completeTimer)
     }
-  }, [id, router])
+  }, [id, onComplete])
 
   return (
     <div className="summoning-container">

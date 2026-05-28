@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { supabase, PRIVILEGI, type Legend } from '@/lib/supabase'
 import type { Metadata } from 'next'
-import { getTotemActivation } from '@/lib/totem'
+import KeeperUpdater from '@/components/KeeperUpdater'
 
 interface ChroniclePageProps {
   params: Promise<{ id: string }>
@@ -144,6 +144,12 @@ export default async function ChroniclePage({ params }: ChroniclePageProps) {
             <Link href="/explore" className="btn btn-primary btn-block">
               ← Explore More Legends
             </Link>
+
+            <KeeperUpdater
+              legendId={legend.id}
+              currentKeeper={legend.possessore_attuale}
+              color={privilegi.color}
+            />
           </div>
         </div>
 
