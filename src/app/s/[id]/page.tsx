@@ -3,10 +3,11 @@ import Link from 'next/link'
 import { supabase, PRIVILEGI } from '@/lib/supabase'
 import type { Metadata } from 'next'
 
-interface Props { params: { id: string } }
+interface Props { params: Promise<{ id: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { data } = await supabase.from('legends').select('nome').eq('id', params.id.toUpperCase()).single()
+  const { id } = await params
+  const { data } = await supabase.from('legends').select('nome').eq('id', id.toUpperCase()).single()
   return { title: data ? `${data.nome} — Legends` : 'Spirit Not Found' }
 }
 
@@ -24,11 +25,12 @@ function fmtDate(iso: string): string {
 }
 
 export default async function SpiritPage({ params }: Props) {
-  const id = params.id.toUpperCase()
+  const { id } = await params
+  const upperId = id.toUpperCase()
 
   const [{ data: legend }, { data: awakenings }] = await Promise.all([
-    supabase.from('legends').select('*').eq('id', id).single(),
-    supabase.from('awakenings').select('*').eq('legend_id', id).order('created_at', { ascending: true }),
+    supabase.from('legends').select('*').eq('id', upperId).single(),
+    supabase.from('awakenings').select('*').eq('legend_id', upperId).order('created_at', { ascending: true }),
   ])
 
   if (!legend) notFound()
