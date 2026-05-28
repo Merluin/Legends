@@ -1,12 +1,6 @@
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
 
-export default async function Home() {
-  const { data: legends } = await supabase
-    .from('legends')
-    .select('id, nome, tipo, possessore_attuale, creato')
-    .order('creato', { ascending: false })
-    .limit(3)
+export default function Home() {
 
   return (
     <main>
@@ -93,56 +87,6 @@ export default async function Home() {
 
       <hr className="divider" />
 
-      {/* THE VOCABULARY */}
-      <section className="wrap">
-        <h2 className="display" style={{ fontSize: '40px', marginBottom: '8px' }}>THE VOCABULARY</h2>
-        <p style={{ color: 'var(--dim)', fontStyle: 'italic', marginBottom: '28px' }}>Drawn from the real language of gamers — MTG, D&D, Spirit Island, Warhammer.</p>
-        <div style={{ display: 'grid', gap: '2px' }}>
-          {[
-            { term: 'Legend',          def: 'The physical NFC card. Consumable, unique. The body of the Spirit.' },
-            { term: 'Spirit',          def: 'The digital soul. Lives on the web, accumulates story, never dies.' },
-            { term: 'Summoner',        def: 'Who creates a new Legend. This role is held only once.' },
-            { term: 'Keeper',          def: 'The current holder. Has the Right — but only if the Legend is brought into play.' },
-            { term: 'The Circle',      def: 'The group of players gathered around the table.' },
-            { term: 'Worthiest Loss',  def: 'The player who lost with the most skill, fairness, or grace. Receives the Legend.' },
-            { term: 'Awakening',       def: 'The ritual transfer of the Legend from one Keeper to the next.' },
-            { term: 'Chronicle',       def: 'The act of registering an Awakening in the Spirit\'s record.' },
-            { term: 'Fade',            def: 'When the physical card deteriorates. The card fades; the Spirit endures.' },
-          ].map(v => (
-            <div key={v.term} style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '16px', padding: '14px 0', borderBottom: '1px solid var(--border)' }}>
-              <div className="display" style={{ fontSize: '15px', color: 'var(--accent-light)' }}>{v.term}</div>
-              <div style={{ color: 'var(--muted)', fontSize: '16px' }}>{v.def}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <hr className="divider" />
-
-      {/* RECENT LEGENDS */}
-      {legends && legends.length > 0 && (
-        <section className="wrap">
-          <h2 className="display" style={{ fontSize: '40px', marginBottom: '24px' }}>SPIRITS IN CIRCULATION</h2>
-          <div>
-            {legends.map(l => (
-              <Link key={l.id} href={`/s/${l.id}`} style={{ textDecoration: 'none' }}>
-                <div className="card legend-row" style={{ marginBottom: '12px' }}>
-                  <div style={{ flex: 1 }}>
-                    <div className="display" style={{ fontSize: '20px', color: 'var(--text)' }}>{l.nome}</div>
-                    <div style={{ fontSize: '14px', color: 'var(--muted)', marginTop: '4px' }}>
-                      #{l.id} · Keeper: <span style={{ color: 'var(--accent-light)' }}>{l.possessore_attuale}</span>
-                    </div>
-                  </div>
-                  <div style={{ color: 'var(--dim)', fontSize: '20px' }}>→</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div style={{ marginTop: '16px' }}>
-            <Link href="/explore" className="btn btn-ghost">View all Legends →</Link>
-          </div>
-        </section>
-      )}
 
       {/* CTA */}
       <section style={{ textAlign: 'center', padding: '80px 24px', background: 'linear-gradient(180deg, transparent, rgba(123, 94, 167, 0.08))' }}>
