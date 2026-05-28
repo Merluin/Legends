@@ -51,17 +51,17 @@ export default function Home() {
 
         <div style={{ display: 'grid', gap: '24px' }}>
           {[
-            { icon: '♔', title: 'FIRST', desc: 'You decide who opens the game.' },
-            { icon: '◈', title: 'COLOUR', desc: 'You choose your colour or faction.' },
-            { icon: '⚄', title: 'GAME', desc: 'You choose what game gets played.' },
-            { icon: '❧', title: 'BOND', desc: 'You choose your partner or team.' },
+            { icon: '♔', title: 'FIRST', desc: 'You decide who opens the game.', color: '#D4A843' },
+            { icon: '◈', title: 'COLOUR', desc: 'You choose your colour or faction.', color: '#9B7FD4' },
+            { icon: '⚄', title: 'GAME', desc: 'You choose what game gets played.', color: '#6BB89B' },
+            { icon: '❧', title: 'BOND', desc: 'You choose your partner or team.', color: '#D48B9B' },
           ].map((item, idx) => (
             <div key={idx} style={{ display: 'flex', gap: '20px', paddingBottom: '20px', borderBottom: idx < 3 ? '1px solid var(--border)' : 'none' }}>
-              <div style={{ fontSize: '40px', color: 'var(--accent-light)', minWidth: '60px' }}>
+              <div style={{ fontSize: '40px', color: item.color, minWidth: '60px' }}>
                 {item.icon}
               </div>
               <div>
-                <div className="display" style={{ fontSize: '18px', marginBottom: '6px', color: 'var(--accent-light)' }}>
+                <div className="display" style={{ fontSize: '18px', marginBottom: '6px', color: item.color }}>
                   {item.title}
                 </div>
                 <div style={{ fontSize: '16px', color: 'var(--muted)' }}>
