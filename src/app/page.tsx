@@ -26,15 +26,26 @@ export default function Home() {
       {/* WHAT IS A LEGEND */}
       <section className="wrap">
         <h2 className="display" style={{ fontSize: '40px', marginBottom: '24px' }}>WHAT IS A LEGEND?</h2>
-        <p style={{ color: 'var(--muted)', marginBottom: '16px', fontSize: '19px' }}>
-          A Legend is a small physical card — NFC-enabled, unique, consumable. It carries a single privilege: the right to decide something for your group during the next game session.
-        </p>
-        <p style={{ color: 'var(--muted)', marginBottom: '16px', fontSize: '19px' }}>
-          But a Legend is more than a card. Inside it lives a <strong style={{ color: 'var(--accent-light)' }}>Spirit</strong> — a digital entity that accumulates the history of every game played, every hand that held it, every city it travelled through.
-        </p>
-        <p style={{ color: 'var(--muted)', fontSize: '19px' }}>
-          The card will fade with time. The Spirit never does.
-        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start', marginBottom: '32px' }}>
+          <div>
+            <p style={{ color: 'var(--muted)', marginBottom: '16px', fontSize: '19px' }}>
+              A Legend is a small physical card — NFC-enabled, unique, consumable. It carries a single privilege: the right to decide something for your group during the next game session.
+            </p>
+            <p style={{ color: 'var(--muted)', marginBottom: '16px', fontSize: '19px' }}>
+              But a Legend is more than a card. Inside it lives a <strong style={{ color: 'var(--accent-light)' }}>Spirit</strong> — a digital entity that accumulates the history of every game played, every hand that held it, every city it travelled through.
+            </p>
+            <p style={{ color: 'var(--muted)', fontSize: '19px' }}>
+              The card will fade with time. The Spirit never does.
+            </p>
+          </div>
+          <div style={{ borderRadius: '4px', overflow: 'hidden' }}>
+            <img
+              src="/images/legend_game.png"
+              alt="Legends gameplay - friends playing board games with a Legend card"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </div>
+        </div>
       </section>
 
       <hr className="divider" />
