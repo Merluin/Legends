@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { isTotemActivated } from '@/lib/totem'
 import SummoningExperience from '@/components/SummoningExperience'
 import TotemSetupForm from '@/components/TotemSetupForm'
+import LogAwakeningModal from '@/components/LogAwakeningModal'
 import { PRIVILEGI, type Legend } from '@/lib/supabase'
 import { supabase } from '@/lib/supabase'
 
@@ -12,7 +13,7 @@ interface TotemPageProps {
   params: Promise<{ id: string }>
 }
 
-type PagePhase = 'loading' | 'summoning' | 'setup'
+type PagePhase = 'loading' | 'summoning' | 'setup' | 'log-entry'
 
 export default function TotemPage({ params }: TotemPageProps) {
   const router = useRouter()
@@ -32,12 +33,6 @@ export default function TotemPage({ params }: TotemPageProps) {
     // Check if this totem has been activated before
     const activated = isTotemActivated(id)
 
-    if (activated) {
-      // Returning visitor: redirect immediately
-      router.push(`/chronicle/${id}`)
-      return
-    }
-
     // First-time visitor: fetch legend and show summoning
     supabase
       .from('legends')
@@ -47,7 +42,9 @@ export default function TotemPage({ params }: TotemPageProps) {
       .then(({ data }) => {
         if (data) {
           setLegend(data)
-          setPhase('summoning')
+          // If first time: show summoning
+          // If return: show log entry
+          setPhase(activated ? 'log-entry' : 'summoning')
         }
       })
   }, [id, router])
@@ -65,7 +62,7 @@ export default function TotemPage({ params }: TotemPageProps) {
 
   return (
     <>
-      {/* Show summoning animation first */}
+      {/* First visit: show summoning animation */}
       {phase === 'summoning' && (
         <div>
           <SummoningExperience
@@ -95,11 +92,23 @@ export default function TotemPage({ params }: TotemPageProps) {
         </div>
       )}
 
-      {/* After animation, show setup form */}
+      {/* First visit: setup form to create spirit */}
       {phase === 'setup' && (
         <TotemSetupForm
           id={id}
           color={color}
+        />
+      )}
+
+      {/* Return visits: log entry form to record game events */}
+      {phase === 'log-entry' && (
+        <LogAwakeningModal
+          legendId={id}
+          spiritName={legend.nome}
+          color={color}
+          onClose={() => router.push(`/chronicle/${id}`)}
+          onSave={() => router.push(`/chronicle/${id}`)}
+          isReturnVisit={true}
         />
       )}
     </>

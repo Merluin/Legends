@@ -9,6 +9,7 @@ interface LogAwakeningModalProps {
   color: string
   onClose: () => void
   onSave: () => void
+  isReturnVisit?: boolean
 }
 
 const ADJECTIVES = [
@@ -32,6 +33,7 @@ export default function LogAwakeningModal({
   color,
   onClose,
   onSave,
+  isReturnVisit = false,
 }: LogAwakeningModalProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -156,7 +158,9 @@ export default function LogAwakeningModal({
             CAPTAIN'S LOG
           </h2>
           <p style={{ color: 'var(--muted)', fontStyle: 'italic', fontSize: '14px' }}>
-            Record this awakening for the ages
+            {isReturnVisit
+              ? `${spiritName} awakens again...`
+              : 'Record this awakening for the ages'}
           </p>
         </div>
 
