@@ -3,7 +3,6 @@
 // Vercel rebuild trigger
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { isLegendActivated } from '@/lib/legend'
 import SummoningExperience from '@/components/SummoningExperience'
 import TotemSetupForm from '@/components/TotemSetupForm'
 import LogAwakeningModal from '@/components/LogAwakeningModal'
@@ -27,14 +26,11 @@ export default function LegendPage({ params }: LegendPageProps) {
     params.then(setId)
   }, [params])
 
-  // Check activation state and fetch legend data
+  // Fetch legend and determine phase based on setup status
   useEffect(() => {
     if (!id) return
 
-    // Check if this legend has been activated before
-    const activated = isLegendActivated(id)
-
-    // First-time visitor: fetch legend and show summoning
+    // Fetch legend data
     supabase
       .from('legends')
       .select('*')
@@ -43,9 +39,9 @@ export default function LegendPage({ params }: LegendPageProps) {
       .then(({ data }) => {
         if (data) {
           setLegend(data)
-          // If first time: show summoning
-          // If return: show log entry
-          setPhase(activated ? 'log-entry' : 'summoning')
+          // If legend hasn't been set up yet (no nome): show summoning
+          // If legend is already set up: show log entry
+          setPhase(data.nome ? 'log-entry' : 'summoning')
         }
       })
   }, [id, router])

@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
-import { activateLegend } from '@/lib/legend'
 import { PRIVILEGI } from '@/lib/supabase'
 
 interface TotemSetupFormProps {
@@ -43,9 +42,7 @@ export default function TotemSetupForm({ id, color }: TotemSetupFormProps) {
 
       if (updateError) throw updateError
 
-      // Record activation
-      activateLegend(id)
-
+      // Setup complete - legend data is now stored in Supabase
       // Redirect to chronicle
       router.push(`/chronicle/${id}`)
     } catch (err) {
