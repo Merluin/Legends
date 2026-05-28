@@ -1,14 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, use } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 
-interface Props { params: { id: string } }
+type Props = { params: Promise<{ id: string }> }
 
 export default function AwakenPage({ params }: Props) {
-  const id = params.id.toUpperCase()
+  const { id: rawId } = use(params)
+  const id = rawId.toUpperCase()
   const router = useRouter()
 
   const [keeper, setKeeper]   = useState('')
@@ -25,7 +26,6 @@ export default function AwakenPage({ params }: Props) {
     setLoading(true)
     setError(null)
 
-    // 1. Get current keeper
     const { data: legend, error: legendErr } = await supabase
       .from('legends')
       .select('possessore_attuale')
@@ -34,7 +34,6 @@ export default function AwakenPage({ params }: Props) {
 
     if (legendErr || !legend) { setError('Legend not found.'); setLoading(false); return }
 
-    // 2. Insert awakening
     const { error: insertErr } = await supabase.from('awakenings').insert({
       legend_id: id,
       tipo: 'passaggio',
@@ -48,7 +47,6 @@ export default function AwakenPage({ params }: Props) {
 
     if (insertErr) { setError('Error recording awakening. Try again.'); setLoading(false); return }
 
-    // 3. Update keeper
     await supabase.from('legends').update({ possessore_attuale: keeper.trim() }).eq('id', id)
 
     router.push(`/s/${id}`)
@@ -75,12 +73,10 @@ export default function AwakenPage({ params }: Props) {
             <label>THE WORTHIEST LOSS — NEW KEEPER NICKNAME *</label>
             <input value={keeper} onChange={e => setKeeper(e.target.value)} placeholder="Who played best without winning?" maxLength={40} required />
           </div>
-
           <div className="field">
             <label>GAME PLAYED *</label>
             <input value={game} onChange={e => setGame(e.target.value)} placeholder="Wingspan, Catan, Dixit…" maxLength={60} required />
           </div>
-
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div className="field">
               <label>PLAYERS IN THE CIRCLE</label>
@@ -91,10 +87,9 @@ export default function AwakenPage({ params }: Props) {
               <input value={port} onChange={e => setPort(e.target.value)} placeholder="Milano" maxLength={60} />
             </div>
           </div>
-
           <div className="field">
-            <label>A NOTE FOR THE SHIP'S LOG (optional)</label>
-            <textarea value={note} onChange={e => setNote(e.target.value)} placeholder="What made this loss worthy? What happened at the table?" maxLength={280} />
+            <label>A NOTE FOR THE LOG (optional)</label>
+            <textarea value={note} onChange={e => setNote(e.target.value)} placeholder="What made this loss worthy?" maxLength={280} />
           </div>
 
           {error && <div className="error-box">{error}</div>}
